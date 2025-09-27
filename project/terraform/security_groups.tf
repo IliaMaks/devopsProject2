@@ -1,6 +1,4 @@
-# -------------------------
-# Security Group for App EC2 Instances
-# -------------------------
+
 resource "aws_security_group" "app_sg" {
   name        = "App-SG"
   description = "Security Group for App EC2"
@@ -11,7 +9,7 @@ resource "aws_security_group" "app_sg" {
   }
 }
 
-# Allow HTTP/HTTPS traffic from ELB
+
 resource "aws_security_group_rule" "app_allow_http" {
   type                     = "ingress"
   from_port                = 80
@@ -30,7 +28,7 @@ resource "aws_security_group_rule" "app_allow_https" {
   source_security_group_id = aws_security_group.elb_sg.id
 }
 
-# Outbound traffic allowed
+
 resource "aws_security_group_rule" "app_egress" {
   type              = "egress"
   from_port         = 0
@@ -41,9 +39,7 @@ resource "aws_security_group_rule" "app_egress" {
 }
 
 
-# -------------------------
-# Security Group for Ansible Node
-# -------------------------
+
 resource "aws_security_group" "ansible_sg" {
   name        = "Ansible-SG"
   description = "Security Group for Ansible Node in Public Subnet"
@@ -54,7 +50,7 @@ resource "aws_security_group" "ansible_sg" {
   }
 }
 
-# Allow SSH from the internet
+
 resource "aws_security_group_rule" "ansible_ssh" {
   type              = "ingress"
   from_port         = 22
@@ -64,7 +60,7 @@ resource "aws_security_group_rule" "ansible_ssh" {
   security_group_id = aws_security_group.ansible_sg.id
 }
 
-# Outbound traffic allowed
+
 resource "aws_security_group_rule" "ansible_egress" {
   type              = "egress"
   from_port         = 0
@@ -75,9 +71,7 @@ resource "aws_security_group_rule" "ansible_egress" {
 }
 
 
-# -------------------------
-# Security Group for ELB
-# -------------------------
+
 resource "aws_security_group" "elb_sg" {
   name        = "ELB-SG"
   description = "Security Group for Load Balancer"
@@ -88,7 +82,7 @@ resource "aws_security_group" "elb_sg" {
   }
 }
 
-# Allow HTTP/HTTPS from the internet
+
 resource "aws_security_group_rule" "elb_ingress_http" {
   type              = "ingress"
   from_port         = 80
@@ -107,7 +101,7 @@ resource "aws_security_group_rule" "elb_ingress_https" {
   security_group_id = aws_security_group.elb_sg.id
 }
 
-# Outbound traffic allowed
+
 resource "aws_security_group_rule" "elb_egress" {
   type              = "egress"
   from_port         = 0

@@ -1,4 +1,4 @@
-# Поиск свежего Ubuntu AMI в us-east-1
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
@@ -8,7 +8,7 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-# Ansible control node (Public Subnet)
+
 resource "aws_instance" "ansible" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.vm_size
@@ -20,7 +20,7 @@ resource "aws_instance" "ansible" {
   tags = { Name = "ansible-node" }
 }
 
-# App servers (Private Subnets)
+
 resource "aws_instance" "app1" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.vm_size

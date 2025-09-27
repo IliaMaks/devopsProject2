@@ -1,6 +1,6 @@
 resource "aws_elb" "app_elb" {
   name               = "project2-elb"
-  subnets            = [aws_subnet.public.id]     # ОДИН public subnet — допустимо для Classic ELB
+  subnets            = [aws_subnet.public.id]     
   security_groups    = [aws_security_group.elb_sg.id]
 
   listener {
